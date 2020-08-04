@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">torti_app_mobile</string>
+    <string name="iniciar_sesion">INICIAR SESÍON</string>
+    <string name="olvidar_password">¿Olvidate tu contraseña?</string>
 </resources>
