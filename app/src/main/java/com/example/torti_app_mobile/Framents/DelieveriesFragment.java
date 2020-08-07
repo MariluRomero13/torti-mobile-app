@@ -1,5 +1,6 @@
 package com.example.torti_app_mobile.Framents;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,21 +11,36 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.torti_app_mobile.Adapters.DelieveriesAdapter;
+import com.example.torti_app_mobile.Classes.VolleyS;
 import com.example.torti_app_mobile.Models.Customer;
 import com.example.torti_app_mobile.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.example.torti_app_mobile.Classes.Enviroment.api_url;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DelieveriesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DelieveriesFragment extends Fragment {
+public class DelieveriesFragment extends Fragment implements DelieveriesAdapter.OnDeliveryClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,15 +89,62 @@ public class DelieveriesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_delieveries, container, false);
-
-        List<Customer> lista = new ArrayList<>();
-        lista.add(new Customer("La Esquina", "Las Etnias", "8712345678", "", ""));
-        lista.add(new Customer("Tortilleria Las Etnias", "Las Etnias", "8714567890", "", ""));
         this.recyclerView = rootView.findViewById(R.id.r_delivieries);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(new DelieveriesAdapter(lista));
-        Log.i("LISTA::", lista.toString());
+        getAssignmentsCustomersFromServer();
         return rootView;
     }
+
+    private void getAssignmentsCustomersFromServer() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
+                api_url + "api/deliverier/assignment-customers", null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        List<Customer> customerList = new ArrayList<>();
+                        try {
+                            JSONArray assignmentsCustomer =
+                                    response.getJSONArray("assignCustomer");
+                            for (int i = 0; i < assignmentsCustomer.length(); i++) {
+                                JSONObject assignment
+                                        = assignmentsCustomer.getJSONObject(i);
+                                JSONObject customerJson =
+                                        assignment.getJSONObject("customers");
+                                String name = customerJson.getString("name");
+                                String address = customerJson.getString("address");
+                                String phone = customerJson.getString("phone");
+                                double latitude = customerJson.getDouble("latitude");
+                                double longitude = customerJson.getDouble("longitude");
+                                Customer customer =
+                                        new Customer(name, address, phone, latitude, longitude);
+                                customerList.add(customer);
+                            }
+                            recyclerView.setHasFixedSize(true);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                            recyclerView.setAdapter(new DelieveriesAdapter(customerList, DelieveriesFragment.this));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "bearer " +
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjIsImlhdCI6MTU5NjgxOTQyNiwiZXhwIjoxNTk2ODQ4MjI2fQ.Fadk9Z8O0H7iVaIDoMKnibSmydgJ0D4pimqan06Uy8g");
+                return headers;
+            }
+        };
+        VolleyS.getInstance(getContext()).getQueue().add(request);
+    }
+
+    @Override
+    public void onDeliveryClick(Customer customer) {
+        Log.e("customer", customer.getName());
+    }
+
 }

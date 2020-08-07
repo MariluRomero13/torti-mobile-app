@@ -4,10 +4,10 @@ public class Customer {
     String name;
     String address;
     String phone;
-    String latitude;
-    String longitude;
+    double latitude;
+    double longitude;
 
-    public Customer(String name, String address, String phone, String latitude, String longitude) {
+    public Customer(String name, String address, String phone, double latitude, double longitude) {
         this.name = name;
         this.address = address;
         this.phone = phone;
@@ -39,19 +39,19 @@ public class Customer {
         this.phone = phone;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 }
