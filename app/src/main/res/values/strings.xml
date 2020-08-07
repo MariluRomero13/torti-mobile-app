@@ -2,4 +2,6 @@
     <string name="app_name">torti_app_mobile</string>
     <string name="iniciar_sesion">INICIAR SESÍON</string>
     <string name="olvidar_password">¿Olvidate tu contraseña?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

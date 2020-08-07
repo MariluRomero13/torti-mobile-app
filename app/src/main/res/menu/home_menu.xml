@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_deliveries"
+        android:icon="@drawable/ic_baseline_comment_24"
+        android:title="Entregas" />
+
+    <item
+        android:id="@+id/item_product_a"
+        android:icon="@drawable/ic_baseline_comment_24"
+        android:title="Productos asignados" />
+
+    <item
+        android:id="@+id/item_history"
+        android:icon="@drawable/ic_baseline_comment_24"
+        android:title="Historial" />
+</menu>
