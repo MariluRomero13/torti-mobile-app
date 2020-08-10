@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -84,6 +85,32 @@ public class Auth {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("TAG::Login-error", error.toString());
+            }
+        });
+
+        VolleyS.getInstance(context).getQueue().add(json);
+    }
+
+    static public void resetPassword (String password, String newPassword, final Context context) throws JSONException {
+        JSONObject params = new JSONObject();
+        params.put("email", password);
+        params.put("new_password", newPassword);
+
+        JsonObjectRequest json = new JsonObjectRequest(
+                Request.Method.PUT,
+                Enviroment.api_url + "/login",
+                params,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Toast.makeText(context, "Tu contraseña se ha cambiado exitosamente", Toast.LENGTH_SHORT).show();
+                        Log.d("TAG:resetPassword", response.toString());
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("TAG:resetPassword-error", error.toString());
+                Toast.makeText(context, "La contraseña actual es incorrecta", Toast.LENGTH_SHORT).show();
             }
         });
 
