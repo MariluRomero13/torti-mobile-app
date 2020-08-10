@@ -13,6 +13,10 @@
         android:layout_height="wrap_content"
         android:background="@color/colorOceanBlue"
         android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Torti App"
+        app:titleTextColor="@color/colorWhite"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
         tools:ignore="MissingConstraints" />

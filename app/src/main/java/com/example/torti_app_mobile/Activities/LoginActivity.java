@@ -28,10 +28,12 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(LoginActivity.this, "Hola", Toast.LENGTH_SHORT).show();
                 try {
-                    Auth.login(txt_email.getText().toString(), txt_password.getText().toString(), LoginActivity.this);
-                    Log.d("TAG:Token", Auth.getAuth(getApplicationContext()).getToken());
+                    if (txt_email.getText().length() > 0  && txt_password.getText().length() > 0) {
+                        Auth.login(txt_email.getText().toString(), txt_password.getText().toString(), LoginActivity.this);
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Favor de llenar todos los campos", Toast.LENGTH_SHORT).show();
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

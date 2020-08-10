@@ -26,10 +26,12 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (Auth.getAuth(getApplicationContext()) != null) {
+                if (Auth.getAuth(getApplicationContext()) != null && Auth.HasAuth) {
+                    finish();
                     startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                    Log.d("Tag:hasToken", "True");
+                    Log.d("Tag:hasToken", Auth.getAuth(getApplicationContext()).getToken());
                 } else {
+                    finish();
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                     Log.d("Tag:hasToken", "False");
                 }
