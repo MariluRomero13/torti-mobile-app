@@ -99,7 +99,7 @@ public class ProductsAssigmentFragment extends Fragment {
 
     private void getAssignmentProductsFromServer() {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-                api_url + "api/deliverier/assignment-products", null,
+                api_url + "/assignment-products", null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -136,7 +136,7 @@ public class ProductsAssigmentFragment extends Fragment {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("Authorization", "bearer " +
-                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjIsImlhdCI6MTU5NjgxOTQyNiwiZXhwIjoxNTk2ODQ4MjI2fQ.Fadk9Z8O0H7iVaIDoMKnibSmydgJ0D4pimqan06Uy8g");
+                        Auth.getAuth(getContext()).getToken());
                 return headers;
             }
         };
