@@ -4,14 +4,20 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.torti_app_mobile.Models.Customer;
 import com.example.torti_app_mobile.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +31,7 @@ public class MapFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private GoogleMap map;
+    private Customer customer = null;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -64,6 +71,10 @@ public class MapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if (getArguments() != null) {
+            this.customer = getArguments().getParcelable("customer");
+        }
+
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().
@@ -72,6 +83,12 @@ public class MapFragment extends Fragment {
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 map = googleMap;
+                LatLng latLng = new LatLng(25.5528341, -103.3926577);
+                MarkerOptions markerOptions = new MarkerOptions()
+                        .position(latLng);
+                map.addMarker(markerOptions);
+
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
             }
         });
         return rootView;

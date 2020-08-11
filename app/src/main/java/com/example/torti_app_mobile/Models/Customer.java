@@ -1,10 +1,13 @@
 package com.example.torti_app_mobile.Models;
 
-public class Customer {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Customer implements Parcelable {
     private int id;
-    String name;
-    String address;
-    String phone;
+    private String name;
+    private String address;
+    private String phone;
     double latitude;
     double longitude;
 
@@ -15,6 +18,42 @@ public class Customer {
         this.phone = phone;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    private Customer(Parcel in) {
+        this.id = in.readInt();
+        this.name = in.readString();
+        this.address = in.readString();
+        this.phone = in.readString();
+        this.latitude = in.readDouble();
+        this.longitude = in.readDouble();
+    }
+
+    public static final Creator<Customer> CREATOR = new Creator<Customer>() {
+        @Override
+        public Customer createFromParcel(Parcel in) {
+            return new Customer(in);
+        }
+
+        @Override
+        public Customer[] newArray(int size) {
+            return new Customer[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.address);
+        dest.writeString(this.phone);
+        dest.writeDouble(this.latitude);
+        dest.writeDouble(this.longitude);
     }
 
     public String getName() {

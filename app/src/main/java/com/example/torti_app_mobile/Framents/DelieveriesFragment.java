@@ -1,9 +1,15 @@
 package com.example.torti_app_mobile.Framents;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.PopupMenu;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -135,7 +141,7 @@ public class DelieveriesFragment extends Fragment implements DelieveriesAdapter.
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
@@ -148,18 +154,23 @@ public class DelieveriesFragment extends Fragment implements DelieveriesAdapter.
     }
 
     @Override
-    public void onDeliveryClick(View v, Customer customer) {
+    public void onDeliveryClick(View v, final Customer customer) {
         PopupMenu popup = new PopupMenu(getContext(), v);
         popup.inflate(R.menu.delieveries_menu);
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @SuppressLint("MissingPermission")
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.item_call:
+                        String numero = customer.getPhone();
+                        numero.trim();
+                        Intent intent = new Intent(Intent.ACTION_CALL);
+                        intent.setData(Uri.parse("tel:" + numero));
+                        getContext().startActivity(intent);
                         Toast.makeText(getContext(), "Llamar", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.item_location:
-                        Toast.makeText(getContext(), "Ubicacion", Toast.LENGTH_SHORT).show();
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.replace(R.id.delieveries_fragment, new MapFragment());
                         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
