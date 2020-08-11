@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.torti_app_mobile.Activities.HomeActivity;
 import com.example.torti_app_mobile.Models.Customer;
 import com.example.torti_app_mobile.R;
 
@@ -23,7 +24,8 @@ import java.util.List;
 
 public class DelieveriesAdapter extends RecyclerView.Adapter<DelieveriesAdapter.ViewHolder> {
     public interface OnDeliveryClickListener{
-        void onDeliveryClick(Customer customer);
+        void onDeliveryClick(View v, Customer customer);
+        void onItemClick(Customer customer);
     }
     private List<Customer> customerList;
     private OnDeliveryClickListener listener;
@@ -49,37 +51,23 @@ public class DelieveriesAdapter extends RecyclerView.Adapter<DelieveriesAdapter.
         holder.txtCustomer.setText(customer.getName());
         holder.txtPhone.setText(customer.getPhone());
         Log.d("ADAPTER:", customer.getName());
-        holder.iconMoreVert.setOnClickListener(new View.OnClickListener() {
+        if(context instanceof HomeActivity) {
+            holder.iconMoreVert.setVisibility(View.VISIBLE);
+            holder.iconMoreVert.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onDeliveryClick(v, customer);
+                }
+            });
+        }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onDeliveryClick(customer);
-                PopupMenu popup = new PopupMenu(context, holder.iconMoreVert);
-                popup.inflate(R.menu.delieveries_menu);
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.item_call:
-                                Toast.makeText(context, "Llamar", Toast.LENGTH_SHORT).show();
-                                break;
-                            case R.id.item_location:
-                                Toast.makeText(context, "Ubicacion", Toast.LENGTH_SHORT).show();
-                                break;
-                            case R.id.item_sales:
-                                Toast.makeText(context, "Ventas", Toast.LENGTH_SHORT).show();
-                                break;
-                            case R.id.item_pending_payment:
-                                Toast.makeText(context, "Pagos pendientes", Toast.LENGTH_SHORT).show();
-                                break;
-                            default:
-                                break;
-                        }
-                        return false;
-                    }
-                });
-                popup.show();
+                listener.onItemClick(customer);
             }
         });
+
     }
 
     @Override

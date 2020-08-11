@@ -3,12 +3,14 @@ package com.example.torti_app_mobile.Framents;
 import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -110,13 +112,14 @@ public class DelieveriesFragment extends Fragment implements DelieveriesAdapter.
                                         = assignmentsCustomer.getJSONObject(i);
                                 JSONObject customerJson =
                                         assignment.getJSONObject("customers");
+                                int id = customerJson.getInt("id");
                                 String name = customerJson.getString("name");
                                 String address = customerJson.getString("address");
                                 String phone = customerJson.getString("phone");
                                 double latitude = customerJson.getDouble("latitude");
                                 double longitude = customerJson.getDouble("longitude");
                                 Customer customer =
-                                        new Customer(name, address, phone, latitude, longitude);
+                                        new Customer(id, name, address, phone, latitude, longitude);
                                 customerList.add(customer);
                             }
                             recyclerView.setHasFixedSize(true);
@@ -144,8 +147,36 @@ public class DelieveriesFragment extends Fragment implements DelieveriesAdapter.
     }
 
     @Override
-    public void onDeliveryClick(Customer customer) {
-        Log.e("customer", customer.getName());
+    public void onDeliveryClick(View v, Customer customer) {
+        PopupMenu popup = new PopupMenu(getContext(), v);
+        popup.inflate(R.menu.delieveries_menu);
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.item_call:
+                        Toast.makeText(getContext(), "Llamar", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.item_location:
+                        Toast.makeText(getContext(), "Ubicacion", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.item_sales:
+                        Toast.makeText(getContext(), "Ventas", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.item_pending_payment:
+                        Toast.makeText(getContext(), "Pagos pendientes", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
+        popup.show();
     }
 
+    @Override
+    public void onItemClick(Customer customer) {
+
+    }
 }

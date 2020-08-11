@@ -1,5 +1,6 @@
 package com.example.torti_app_mobile.Framents;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.torti_app_mobile.Activities.HistoryActivity;
 import com.example.torti_app_mobile.R;
 
 /**
@@ -15,12 +17,14 @@ import com.example.torti_app_mobile.R;
  * Use the {@link HistoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HistoryFragment extends Fragment {
+public class HistoryFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final int SALES_COMPLETED = 1;
+    private static final int SALES_PENDING = 2;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -61,6 +65,26 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_history, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_history, container, false);
+        View btnHistorySales = rootView.findViewById(R.id.btn_history_sales);
+        View btnHistoryPending = rootView.findViewById(R.id.btn_history_pending_p);
+        btnHistoryPending.setOnClickListener(this);
+        btnHistorySales.setOnClickListener(this);
+        return rootView;
     }
-}
+
+    @Override
+    public void onClick(View v) {
+        if(getActivity() == null) return;
+        Intent intent = new Intent(getContext(), HistoryActivity.class);
+        switch (v.getId()) {
+            case R.id.btn_history_sales:
+                intent.putExtra("type", SALES_COMPLETED);
+                break;
+            case R.id.btn_history_pending_p:
+                intent.putExtra("type", SALES_PENDING);
+                break;
+            }
+            getActivity().startActivity(intent);
+        }
+    }
