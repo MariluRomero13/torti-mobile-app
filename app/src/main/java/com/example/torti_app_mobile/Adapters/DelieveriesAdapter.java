@@ -1,9 +1,11 @@
 package com.example.torti_app_mobile.Adapters;
 
-import android.content.Intent;
-import android.os.Bundle;
+import android.content.Context;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.torti_app_mobile.Models.Customer;
@@ -24,6 +27,7 @@ public class DelieveriesAdapter extends RecyclerView.Adapter<DelieveriesAdapter.
     }
     private List<Customer> customerList;
     private OnDeliveryClickListener listener;
+    private Context context;
 
     public DelieveriesAdapter(List<Customer> customerList, OnDeliveryClickListener listener) {
         this.customerList = customerList;
@@ -34,6 +38,7 @@ public class DelieveriesAdapter extends RecyclerView.Adapter<DelieveriesAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_delieveries, viewGroup, false);
+        context = v.getContext();
         DelieveriesAdapter.ViewHolder vh = new DelieveriesAdapter.ViewHolder(v);
         return vh;
     }
@@ -48,6 +53,31 @@ public class DelieveriesAdapter extends RecyclerView.Adapter<DelieveriesAdapter.
             @Override
             public void onClick(View v) {
                 listener.onDeliveryClick(customer);
+                PopupMenu popup = new PopupMenu(context, holder.iconMoreVert);
+                popup.inflate(R.menu.delieveries_menu);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.item_call:
+                                Toast.makeText(context, "Llamar", Toast.LENGTH_SHORT).show();
+                                break;
+                            case R.id.item_location:
+                                Toast.makeText(context, "Ubicacion", Toast.LENGTH_SHORT).show();
+                                break;
+                            case R.id.item_sales:
+                                Toast.makeText(context, "Ventas", Toast.LENGTH_SHORT).show();
+                                break;
+                            case R.id.item_pending_payment:
+                                Toast.makeText(context, "Pagos pendientes", Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                popup.show();
             }
         });
     }
@@ -58,7 +88,7 @@ public class DelieveriesAdapter extends RecyclerView.Adapter<DelieveriesAdapter.
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtCustomer, txtPhone;
         private ImageView iconMoreVert = null;
         public ViewHolder(View itemView){

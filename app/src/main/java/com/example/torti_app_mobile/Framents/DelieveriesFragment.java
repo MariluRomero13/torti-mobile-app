@@ -145,7 +145,7 @@ public class DelieveriesFragment extends Fragment implements DelieveriesAdapter.
 
     @Override
     public void onDeliveryClick(Customer customer) {
-        Log.d("customer", customer.getName());
+        Log.e("customer", customer.getName());
     }
 
 }

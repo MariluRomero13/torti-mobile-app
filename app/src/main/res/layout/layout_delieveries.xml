@@ -41,8 +41,8 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_customer" />
     <ImageView
         android:id="@+id/iconMore"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         tools:ignore="ContentDescription"
         android:src="@drawable/ic_more_vert_black"
         app:layout_constraintEnd_toEndOf="parent"
