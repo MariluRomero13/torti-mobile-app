@@ -42,7 +42,7 @@ public class ProductAssigmentAdapter extends RecyclerView.Adapter<ProductAssigme
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView txtProduct, txtPrice, txtQuantity;
+        private TextView txtProduct, txtPrice, txtQuantity;
         public ViewHolder(View itemView){
             super(itemView);
             txtProduct = itemView.findViewById(R.id.txt_product);

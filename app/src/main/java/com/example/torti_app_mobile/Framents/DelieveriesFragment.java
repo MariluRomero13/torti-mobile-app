@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -159,6 +160,11 @@ public class DelieveriesFragment extends Fragment implements DelieveriesAdapter.
                         break;
                     case R.id.item_location:
                         Toast.makeText(getContext(), "Ubicacion", Toast.LENGTH_SHORT).show();
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        transaction.replace(R.id.delieveries_fragment, new MapFragment());
+                        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
                         break;
                     case R.id.item_sales:
                         Toast.makeText(getContext(), "Ventas", Toast.LENGTH_SHORT).show();
