@@ -1,13 +1,15 @@
 package com.example.torti_app_mobile.Models;
 
 public class Customer {
+    private int id;
     String name;
     String address;
     String phone;
     double latitude;
     double longitude;
 
-    public Customer(String name, String address, String phone, double latitude, double longitude) {
+    public Customer(int id, String name, String address, String phone, double latitude, double longitude) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.phone = phone;
@@ -53,5 +55,13 @@ public class Customer {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
