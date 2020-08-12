@@ -193,7 +193,5 @@ public class DelieveriesFragment extends Fragment implements DelieveriesAdapter.
     }
 
     @Override
-    public void onItemClick(Customer customer) {
-
-    }
+    public void onItemClick(Customer customer) {}
 }

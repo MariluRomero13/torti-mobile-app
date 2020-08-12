@@ -32,7 +32,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_comment_24"
+                    android:src="@drawable/sale"
                     android:layout_centerInParent="true"/>
 
             </RelativeLayout>
@@ -64,7 +64,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_comment_24"
+                    android:src="@drawable/currency"
                     android:layout_centerInParent="true"/>
 
             </RelativeLayout>
@@ -97,7 +97,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_comment_24"
+                    android:src="@drawable/box"
                     android:layout_centerInParent="true"/>
 
             </RelativeLayout>
