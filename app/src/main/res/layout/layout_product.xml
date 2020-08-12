@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/imgProduct"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        tools:ignore="ContentDescription"
+        android:src="@drawable/logo_tortilleria"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/txvProductName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imgProduct"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".1"/>
+
+    <TextView
+        android:id="@+id/txvProductPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/txvProductName"
+        app:layout_constraintTop_toBottomOf="@id/txvProductName"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/txvQty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/txvProductPrice"
+        app:layout_constraintTop_toBottomOf="@id/txvProductName"
+        app:layout_constraintEnd_toStartOf="@id/txvTotal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/txvTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/txvQty"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txvProductName"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
