@@ -27,6 +27,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.torti_app_mobile.Activities.LiquidateSaleActivity;
 import com.example.torti_app_mobile.Activities.SalesHomeActivity;
 import com.example.torti_app_mobile.Adapters.DelieveriesAdapter;
 import com.example.torti_app_mobile.Classes.VolleyS;
@@ -181,10 +182,10 @@ public class DelieveriesFragment extends Fragment implements DelieveriesAdapter.
                         break;
                     case R.id.item_sales:
                         startActivity(new Intent(getContext(), SalesHomeActivity.class));
-                        Toast.makeText(getContext(), "Ventas", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.item_pending_payment:
                         Toast.makeText(getContext(), "Pagos pendientes", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getContext(), LiquidateSaleActivity.class));
                         break;
                     default:
                         break;

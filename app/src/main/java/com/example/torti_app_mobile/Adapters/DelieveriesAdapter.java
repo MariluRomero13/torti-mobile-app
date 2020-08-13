@@ -60,7 +60,6 @@ public class DelieveriesAdapter extends RecyclerView.Adapter<DelieveriesAdapter.
                 }
             });
         }
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
