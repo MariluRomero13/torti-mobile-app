@@ -27,6 +27,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.torti_app_mobile.Activities.SalesHomeActivity;
 import com.example.torti_app_mobile.Adapters.DelieveriesAdapter;
 import com.example.torti_app_mobile.Classes.VolleyS;
 import com.example.torti_app_mobile.Models.Auth;
@@ -110,6 +111,7 @@ public class DelieveriesFragment extends Fragment implements DelieveriesAdapter.
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        Log.d("TAG:info", response.toString());
                         List<Customer> customerList = new ArrayList<>();
                         try {
                             JSONArray assignmentsCustomer =
@@ -178,6 +180,7 @@ public class DelieveriesFragment extends Fragment implements DelieveriesAdapter.
                         transaction.commit();
                         break;
                     case R.id.item_sales:
+                        startActivity(new Intent(getContext(), SalesHomeActivity.class));
                         Toast.makeText(getContext(), "Ventas", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.item_pending_payment:

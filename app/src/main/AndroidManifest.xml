@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.HistoryDetailsActivity"></activity>
+        <activity android:name=".Activities.SalesHomeActivity"></activity>
+        <activity android:name=".Activities.HistoryDetailsActivity" />
         <activity android:name=".Activities.HistoryActivity" />
         <activity android:name=".Activities.ResetPasswordActivity" />
         <activity android:name=".Activities.HomeActivity" />
@@ -25,6 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

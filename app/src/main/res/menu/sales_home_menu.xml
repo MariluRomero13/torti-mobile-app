@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_sale"
+        android:icon="@drawable/sale"
+        android:title="Vender" />
+
+    <item
+        android:id="@+id/item_pending"
+        android:icon="@drawable/currency"
+        android:title="Pendientes" />
+
+    <item
+        android:id="@+id/item_lost_products"
+        android:icon="@drawable/box"
+        android:title="Devoluciones" />
+</menu>
