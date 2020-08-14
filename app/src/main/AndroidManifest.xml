@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.SalesHomeActivity"></activity>
+        <activity android:name=".Activities.LiquidateSaleActivity"></activity>
+        <activity android:name=".Activities.SalesHomeActivity" />
         <activity android:name=".Activities.HistoryDetailsActivity" />
         <activity android:name=".Activities.HistoryActivity" />
         <activity android:name=".Activities.ResetPasswordActivity" />
