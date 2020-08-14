@@ -1,6 +1,9 @@
 package com.example.torti_app_mobile.Models;
 
+import android.content.Intent;
+
 public class Product {
+    private Integer product_id;
     String product;
     String price;
     Integer quantity;
@@ -8,6 +11,18 @@ public class Product {
     public Product(String product, String price, Integer quantity) {
         this.product = product;
         this.price = price;
+        this.quantity = quantity;
+    }
+
+    public Product(Integer id, String product, String price, Integer quantity) {
+        this.product_id = id;
+        this.product = product;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public Product(Integer id, Integer quantity) {
+        this.product_id = id;
         this.quantity = quantity;
     }
 
@@ -35,7 +50,7 @@ public class Product {
         this.quantity = quantity;
     }
 
-
-
-
+    public Integer getId() {
+        return product_id;
+    }
 }

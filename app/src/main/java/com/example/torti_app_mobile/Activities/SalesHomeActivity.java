@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.torti_app_mobile.Framents.DelieveriesFragment;
 import com.example.torti_app_mobile.Framents.HistoryFragment;
@@ -25,6 +26,7 @@ public class SalesHomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_home);
+        final int customerId = getIntent().getIntExtra("customerId", 0);
 
         bottom_navigation_view = findViewById(R.id.bottom_navigation_sales);
         bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -32,7 +34,7 @@ public class SalesHomeActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.item_sale:
-                        openFragment(SalesFragment.newInstance("", ""));
+                        openFragment(SalesFragment.newInstance(customerId));
                         return true;
                     case R.id.item_pending:
                         openFragment(PendingFragment.newInstance("", ""));

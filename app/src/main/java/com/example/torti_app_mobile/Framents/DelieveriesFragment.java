@@ -133,7 +133,8 @@ public class DelieveriesFragment extends Fragment implements DelieveriesAdapter.
                             }
                             recyclerView.setHasFixedSize(true);
                             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                            recyclerView.setAdapter(new DelieveriesAdapter(customerList, DelieveriesFragment.this));
+                            recyclerView.setAdapter(new DelieveriesAdapter(customerList,
+                                    DelieveriesFragment.this));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -180,8 +181,9 @@ public class DelieveriesFragment extends Fragment implements DelieveriesAdapter.
                         transaction.commit();
                         break;
                     case R.id.item_sales:
-                        startActivity(new Intent(getContext(), SalesHomeActivity.class));
-                        Toast.makeText(getContext(), "Ventas", Toast.LENGTH_SHORT).show();
+                        Intent intentToSale = new Intent(getContext(), SalesHomeActivity.class);
+                        intentToSale.putExtra("customerId", customer.getId());
+                        startActivity(intentToSale);
                         break;
                     case R.id.item_pending_payment:
                         Toast.makeText(getContext(), "Pagos pendientes", Toast.LENGTH_SHORT).show();

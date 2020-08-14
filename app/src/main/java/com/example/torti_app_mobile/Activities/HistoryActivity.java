@@ -32,7 +32,8 @@ import java.util.Map;
 
 import static com.example.torti_app_mobile.Classes.Enviroment.api_url;
 
-public class HistoryActivity extends AppCompatActivity implements DelieveriesAdapter.OnDeliveryClickListener {
+public class HistoryActivity extends AppCompatActivity
+        implements DelieveriesAdapter.OnDeliveryClickListener {
     private RecyclerView recyclerView = null;
     private int statusType = 1;
 
@@ -46,7 +47,7 @@ public class HistoryActivity extends AppCompatActivity implements DelieveriesAda
     }
 
     private void getAssignmentsCustomersFromServer() {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
                 api_url + "/assignment-customers", null,
                 new Response.Listener<JSONObject>() {
                     @Override
