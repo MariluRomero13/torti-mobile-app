@@ -82,7 +82,7 @@ public class HistoryDetailsActivity extends AppCompatActivity {
                                         List<Product> details = new ArrayList<>();
                                         for (int j = 0; j < detailsJson.length(); j++) {
                                             JSONObject productJson
-                                                    = detailsJson.getJSONObject(i);
+                                                    = detailsJson.getJSONObject(j);
                                             int quantity = productJson.getInt("quantity");
                                             String total = productJson.getString("total");
                                             String productName = productJson
