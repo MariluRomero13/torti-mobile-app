@@ -50,7 +50,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:layout_toStartOf="@+id/btn_pay"
-            android:background="@color/colorOceanBlue"
+            android:background="@color/colorGreen"
             android:text="Cancelar"
             android:textColor="@color/colorWhite" />
 
