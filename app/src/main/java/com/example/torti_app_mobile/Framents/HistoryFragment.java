@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.torti_app_mobile.Activities.HistoryActivity;
+import com.example.torti_app_mobile.Models.History;
 import com.example.torti_app_mobile.R;
 
 /**
@@ -23,8 +24,6 @@ public class HistoryFragment extends Fragment implements View.OnClickListener {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static final int SALES_COMPLETED = 1;
-    private static final int SALES_PENDING = 2;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -68,8 +67,10 @@ public class HistoryFragment extends Fragment implements View.OnClickListener {
         View rootView = inflater.inflate(R.layout.fragment_history, container, false);
         View btnHistorySales = rootView.findViewById(R.id.btn_history_sales);
         View btnHistoryPending = rootView.findViewById(R.id.btn_history_pending_p);
+        View btnDevolution = rootView.findViewById(R.id.btn_refund);
         btnHistoryPending.setOnClickListener(this);
         btnHistorySales.setOnClickListener(this);
+        btnDevolution.setOnClickListener(this);
         return rootView;
     }
 
@@ -79,11 +80,14 @@ public class HistoryFragment extends Fragment implements View.OnClickListener {
         Intent intent = new Intent(getContext(), HistoryActivity.class);
         switch (v.getId()) {
             case R.id.btn_history_sales:
-                intent.putExtra("type", SALES_COMPLETED);
+                intent.putExtra("type", History.SALE_COMPLETED);
                 break;
             case R.id.btn_history_pending_p:
-                intent.putExtra("type", SALES_PENDING);
+                intent.putExtra("type", History.SALE_PENDING);
                 break;
+            case R.id.btn_refund:
+                intent.putExtra("type",History.LOST_PRODUCT);
+
             }
             getActivity().startActivity(intent);
         }

@@ -5,6 +5,7 @@ import java.util.List;
 public class History {
     public final static int SALE_COMPLETED = 1;
     public final static int SALE_PENDING = 2;
+    public final static int LOST_PRODUCT = 3;
     private int status;
     private String total;
     private String credit;
