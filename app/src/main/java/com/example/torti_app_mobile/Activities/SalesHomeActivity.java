@@ -40,7 +40,7 @@ public class SalesHomeActivity extends AppCompatActivity {
                         openFragment(PendingFragment.newInstance("", ""));
                         return true;
                     case R.id.item_lost_products:
-                        openFragment(LostProductFragment.newInstance("", ""));
+                        openFragment(LostProductFragment.newInstance(customerId));
                         return true;
                 }
 

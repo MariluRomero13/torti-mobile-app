@@ -53,7 +53,6 @@ public class HomeActivity extends AppCompatActivity {
         bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment = null;
                 switch (item.getItemId()) {
                     case R.id.item_deliveries:
                         openFragment(DelieveriesFragment.newInstance("", ""));

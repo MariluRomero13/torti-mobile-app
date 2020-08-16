@@ -4,6 +4,7 @@ import android.content.Intent;
 
 public class Product {
     private Integer product_id;
+    private String description;
     String product;
     String price;
     Integer quantity;
@@ -31,6 +32,19 @@ public class Product {
         this.price = price;
     }
 
+    public Product(Integer id, String name, Integer quantity, String description) {
+        this.product_id = id;
+        this.product = name;
+        this.quantity = quantity;
+        this.description = description;
+    }
+
+    public Product(Integer id, Integer quantity, String description) {
+        this.product_id = id;
+        this.quantity = quantity;
+        this.description = description;
+    }
+
     public String getProduct() {
         return product;
     }
@@ -41,6 +55,14 @@ public class Product {
 
     public String getPrice() {
         return price;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setPrice(String price) {
