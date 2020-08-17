@@ -107,7 +107,7 @@ public class DelieveriesFragment extends Fragment implements DelieveriesAdapter.
     }
 
     private void getAssignmentsCustomersFromServer() {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
                 api_url + "/assignment-customers", null,
                 new Response.Listener<JSONObject>() {
                     @Override
