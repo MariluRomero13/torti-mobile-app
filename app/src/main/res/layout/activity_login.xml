@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    android:layout_centerInParent="true"
     android:padding="40dp"
     tools:context=".Activities.LoginActivity">
 
@@ -13,7 +12,7 @@
         android:id="@+id/img_logo"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
