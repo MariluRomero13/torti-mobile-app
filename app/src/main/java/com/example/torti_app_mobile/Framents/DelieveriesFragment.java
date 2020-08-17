@@ -186,7 +186,9 @@ public class DelieveriesFragment extends Fragment implements DelieveriesAdapter.
                         startActivity(intentToSale);
                         break;
                     case R.id.item_pending_payment:
-                        startActivity(new Intent(getContext(), LiquidateSaleActivity.class));
+                        Intent intentToLiquidate = new Intent(getContext(), LiquidateSaleActivity.class);
+                        intentToLiquidate.putExtra("customerId", customer.getId());
+                        startActivity(intentToLiquidate);
                         break;
                     default:
                         break;

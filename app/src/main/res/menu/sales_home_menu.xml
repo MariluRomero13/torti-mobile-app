@@ -6,11 +6,6 @@
         android:title="Vender" />
 
     <item
-        android:id="@+id/item_pending"
-        android:icon="@drawable/currency"
-        android:title="Pendientes" />
-
-    <item
         android:id="@+id/item_lost_products"
         android:icon="@drawable/box"
         android:title="Devoluciones" />

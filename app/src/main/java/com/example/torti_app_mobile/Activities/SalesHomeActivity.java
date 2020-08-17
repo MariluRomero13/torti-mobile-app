@@ -36,9 +36,6 @@ public class SalesHomeActivity extends AppCompatActivity {
                     case R.id.item_sale:
                         openFragment(SalesFragment.newInstance(customerId));
                         return true;
-                    case R.id.item_pending:
-                        openFragment(PendingFragment.newInstance("", ""));
-                        return true;
                     case R.id.item_lost_products:
                         openFragment(LostProductFragment.newInstance(customerId));
                         return true;

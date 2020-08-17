@@ -59,10 +59,10 @@ public class SalesFragment extends Fragment implements SaleAdapter.OnTotalChange
     // TODO: Rename and change types of parameters
     private String mParam2;
     private RecyclerView recyclerView;
-    private TextView txvTotal = null;
+    private TextView txvTotal = null, txtPayment =  null;
     private FloatingActionButton fab = null;
     private SaleAdapter saleAdapter = null;
-    private String total = null;
+    private String total = null, payment = null;
 
     public SalesFragment() {
         // Required empty public constructor
@@ -99,6 +99,7 @@ public class SalesFragment extends Fragment implements SaleAdapter.OnTotalChange
         View rootView = inflater.inflate(R.layout.fragment_sales, container, false);
         this.recyclerView = rootView.findViewById(R.id.recyclerView);
         this.txvTotal = rootView.findViewById(R.id.txvTotal);
+        this.txtPayment = rootView.findViewById(R.id.txt_pay);
         this.fab = rootView.findViewById(R.id.fab);
         this.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +112,9 @@ public class SalesFragment extends Fragment implements SaleAdapter.OnTotalChange
                         return;
                     }
                     v.setEnabled(false);
-                    Sale sale = new Sale(customerId, total, total, products);
+                    payment = txtPayment.getText().toString();
+                    Log.d("TAG:Payment", payment);
+                    Sale sale = new Sale(customerId, total, payment, products);
                     sendSaleDataToServer(sale);
                 }
             }
@@ -126,12 +129,15 @@ public class SalesFragment extends Fragment implements SaleAdapter.OnTotalChange
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.d("TAG:Sale", response);
                         saleAdapter.clear();
                         Toast.makeText(getContext(), "Vendido correctamente", Toast.LENGTH_SHORT).show();
+                        getActivity().finish();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.d("TAG:Sale-error", error.toString());
                 fab.setEnabled(true);
             }
         }){
