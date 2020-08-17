@@ -2,6 +2,7 @@ package com.example.torti_app_mobile.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -21,11 +22,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class SalesHomeActivity extends AppCompatActivity {
 
     private BottomNavigationView bottom_navigation_view;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_home);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         final int customerId = getIntent().getIntExtra("customerId", 0);
 
         bottom_navigation_view = findViewById(R.id.bottom_navigation_sales);
@@ -34,9 +38,11 @@ public class SalesHomeActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.item_sale:
+                        getSupportActionBar().setTitle("Realizar Venta");
                         openFragment(SalesFragment.newInstance(customerId));
                         return true;
                     case R.id.item_lost_products:
+                        getSupportActionBar().setTitle("Realizar Devolucion");
                         openFragment(LostProductFragment.newInstance(customerId));
                         return true;
                 }

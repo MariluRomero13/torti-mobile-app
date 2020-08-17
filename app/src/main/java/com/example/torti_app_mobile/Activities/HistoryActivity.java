@@ -1,6 +1,7 @@
 package com.example.torti_app_mobile.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,6 +37,7 @@ public class HistoryActivity extends AppCompatActivity
         implements DelieveriesAdapter.OnDeliveryClickListener {
     private RecyclerView recyclerView = null;
     private int statusType = 1;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,25 @@ public class HistoryActivity extends AppCompatActivity
         this.statusType = getIntent().getIntExtra("type", 1);
         setContentView(R.layout.activity_history);
         this.recyclerView = findViewById(R.id.recyclerView);
-        getAssignmentsCustomersFromServer();
+        this.loadTitleToolbar();
+        this.getAssignmentsCustomersFromServer();
+
+    }
+
+    private void loadTitleToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        switch (this.statusType) {
+            case 1:
+                getSupportActionBar().setTitle("Historial de Ventas");
+                break;
+            case 2:
+                getSupportActionBar().setTitle("Historia de Pagos pendientes");
+                break;
+            case 3:
+                getSupportActionBar().setTitle("Historial de Devoluciones");
+                break;
+        }
     }
 
     private void getAssignmentsCustomersFromServer() {

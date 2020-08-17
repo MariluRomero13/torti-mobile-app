@@ -55,12 +55,15 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.item_deliveries:
+                        getSupportActionBar().setTitle("Entregas");
                         openFragment(DelieveriesFragment.newInstance("", ""));
                         return true;
                     case R.id.item_product_a:
+                        getSupportActionBar().setTitle("Productos");
                         openFragment(ProductsAssigmentFragment.newInstance("", ""));
                         return true;
                     case R.id.item_history:
+                        getSupportActionBar().setTitle("Historiales");
                         openFragment(HistoryFragment.newInstance("", ""));
                         return true;
                 }

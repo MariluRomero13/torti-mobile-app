@@ -1,6 +1,7 @@
 package com.example.torti_app_mobile.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,6 +38,7 @@ import static com.example.torti_app_mobile.Classes.Enviroment.api_url;
 public class HistoryDetailsActivity extends AppCompatActivity {
     private RecyclerView recyclerView = null;
     private TextView txvTitle = null;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +48,20 @@ public class HistoryDetailsActivity extends AppCompatActivity {
         int status = getIntent().getIntExtra("status", 1);
         int customerId = getIntent().getIntExtra("customerId", 1);
         this.recyclerView = findViewById(R.id.recyclerView);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         if(status == History.SALE_PENDING || status == History.SALE_COMPLETED){
             getHistoryDetailsFromServer(status, customerId);
-            if (status == History.SALE_PENDING)
-                txvTitle.setText(R.string.label_sale_pending);
+            if (status == History.SALE_PENDING){
+                getSupportActionBar().setTitle("Historia de Pagos Pendientes");
+            } else {
+                getSupportActionBar().setTitle("Historia de Ventas");
+            }
+
+                // txvTitle.setText(R.string.label_sale_pending);
         } else if(status == History.LOST_PRODUCT) {
-            txvTitle.setText(R.string.label_lost_products);
+            getSupportActionBar().setTitle("Historial de Devoluciones");
+            //txvTitle.setText(R.string.label_lost_products);
             getLostProducts(customerId);
         }
 
