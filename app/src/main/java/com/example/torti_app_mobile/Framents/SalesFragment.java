@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.example.torti_app_mobile.Activities.LiquidateSaleActivity;
 import com.example.torti_app_mobile.Adapters.ProductAssigmentAdapter;
 import com.example.torti_app_mobile.Adapters.SaleAdapter;
 import com.example.torti_app_mobile.Classes.VolleyS;
@@ -26,6 +27,7 @@ import com.example.torti_app_mobile.Models.Auth;
 import com.example.torti_app_mobile.Models.Product;
 import com.example.torti_app_mobile.Models.Sale;
 import com.example.torti_app_mobile.R;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -96,27 +98,52 @@ public class SalesFragment extends Fragment implements SaleAdapter.OnTotalChange
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_sales, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_sales, container, false);
         this.recyclerView = rootView.findViewById(R.id.recyclerView);
         this.txvTotal = rootView.findViewById(R.id.txvTotal);
-        this.txtPayment = rootView.findViewById(R.id.txt_pay);
         this.fab = rootView.findViewById(R.id.fab);
         this.fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if(saleAdapter != null) {
-                    List<Product> products = saleAdapter.getProducts();
-                    if(products.isEmpty()) {
-                        Toast.makeText(getContext(),
-                                "Escoja por lo menos un producto", Toast.LENGTH_SHORT).show();
-                        return;
+            public void onClick(final View v) {
+                final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                        getActivity(), R.style.BottomSheetDialogTheme
+                );
+                View bottomSheetView = LayoutInflater.from(getContext())
+                        .inflate(
+                                R.layout.layout_bottom_sale,
+                                (ViewGroup) rootView.findViewById(R.id.bottom_sheet_sale)
+                        );
+                txtPayment = bottomSheetView.findViewById(R.id.txt_to_pay);
+
+                bottomSheetView.findViewById(R.id.btn_pay_sale).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(saleAdapter != null) {
+                            List<Product> products = saleAdapter.getProducts();
+                            if(products.isEmpty()) {
+                                Toast.makeText(getContext(),
+                                        "Escoja por lo menos un producto", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            v.setEnabled(false);
+                            payment = txtPayment.getText().toString();
+                            Log.d("TAG:Payment", payment);
+                            Sale sale = new Sale(customerId, total, payment, products);
+                            sendSaleDataToServer(sale);
+                        }
+                        bottomSheetDialog.dismiss();
                     }
-                    v.setEnabled(false);
-                    payment = txtPayment.getText().toString();
-                    Log.d("TAG:Payment", payment);
-                    Sale sale = new Sale(customerId, total, payment, products);
-                    sendSaleDataToServer(sale);
-                }
+                });
+
+                bottomSheetView.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        bottomSheetDialog.dismiss();
+                    }
+                });
+
+                bottomSheetDialog.setContentView(bottomSheetView);
+                bottomSheetDialog.show();
             }
         });
         getProductsFromServer();

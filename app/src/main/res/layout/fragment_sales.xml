@@ -59,17 +59,4 @@
         android:src="@drawable/ic_check"
         app:srcCompat="@drawable/ic_check"/>
 
-    <EditText
-        android:id="@+id/txt_pay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="Cantidad a pagar"
-        android:textColor="@color/colorGreen"
-        android:textColorHint="@color/colorGreen"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/fab"
-        app:layout_constraintHorizontal_bias="0.411"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
